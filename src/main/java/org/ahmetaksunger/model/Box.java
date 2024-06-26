@@ -82,6 +82,7 @@ public class Box {
      *
      * @param other The other Box object to swap coordinates with.
      */
+    @Deprecated(forRemoval = false)
     public void swapx(Box other) {
         var tempx = this.x;
         this.x = other.x;

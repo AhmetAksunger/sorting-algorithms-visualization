@@ -33,9 +33,11 @@ public class SortingVisualization extends JFrame {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        int x = 0;
         for (Box box : boxes) {
             g.setColor(box.getColor());
-            g.fillRect(box.getX(), box.getY(), box.getWidth(), box.getHeight());
+            g.fillRect(x, box.getY(), box.getWidth(), box.getHeight());
+            x += boxSpacing;
         }
     }
 

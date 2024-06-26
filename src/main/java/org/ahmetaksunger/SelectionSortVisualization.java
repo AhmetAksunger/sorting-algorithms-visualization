@@ -67,7 +67,6 @@ public class SelectionSortVisualization extends SortingVisualization {
             boxes.get(minIndex).setColor(Color.GRAY);
             super.repaint();
 
-            boxes.get(minIndex).swapx(boxes.get(i));
             Collections.swap(boxes, i, minIndex);
 
         }

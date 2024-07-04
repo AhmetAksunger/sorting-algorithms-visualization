@@ -4,6 +4,9 @@ import org.ahmetaksunger.frame.SortingVisualization;
 import org.ahmetaksunger.model.Box;
 import org.ahmetaksunger.util.BoxNotePlayer;
 import org.ahmetaksunger.util.BoxUtils;
+import org.ahmetaksunger.visualization.BubbleSortVisualization;
+import org.ahmetaksunger.visualization.InsertionSortVisualization;
+import org.ahmetaksunger.visualization.SelectionSortVisualization;
 
 import java.util.List;
 

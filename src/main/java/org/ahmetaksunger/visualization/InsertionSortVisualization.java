@@ -1,4 +1,4 @@
-package org.ahmetaksunger;
+package org.ahmetaksunger.visualization;
 
 import org.ahmetaksunger.frame.SortingVisualization;
 import org.ahmetaksunger.model.Box;

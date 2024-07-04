@@ -17,12 +17,12 @@ public abstract class SortingVisualization extends JFrame {
 
     private final List<Box> boxes;
     private final int boxSpacing;
-    private final BoxNotePlayer player;
+    private BoxNotePlayer boxNotePlayer;
 
-    public SortingVisualization(List<Box> boxes, int boxSpacing, BoxNotePlayer player) {
+    public SortingVisualization(List<Box> boxes, int boxSpacing, BoxNotePlayer boxNotePlayer) {
         this.boxes = boxes;
         this.boxSpacing = boxSpacing;
-        this.player = player;
+        this.boxNotePlayer = boxNotePlayer;
         validateBoxWidths();
         setFrame();
     }
@@ -75,8 +75,12 @@ public abstract class SortingVisualization extends JFrame {
         return boxes;
     }
 
-    public BoxNotePlayer getPlayer() {
-        return player;
+    public BoxNotePlayer getBoxNotePlayer() {
+        return boxNotePlayer;
+    }
+
+    public void setBoxNotePlayer(BoxNotePlayer boxNotePlayer) {
+        this.boxNotePlayer = boxNotePlayer;
     }
 
     /**
@@ -92,7 +96,6 @@ public abstract class SortingVisualization extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.BLACK);
         setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     private void validateBoxWidths() {

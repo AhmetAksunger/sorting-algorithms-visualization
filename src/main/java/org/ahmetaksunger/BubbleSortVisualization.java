@@ -32,6 +32,7 @@ public class BubbleSortVisualization extends SortingVisualization {
 
     @Override
     public void visualize() throws InterruptedException {
+        setTitle(this.getClass().getSimpleName());
         setVisible(true);
         this.sort();
     }
@@ -44,7 +45,7 @@ public class BubbleSortVisualization extends SortingVisualization {
     public void sort() throws InterruptedException {
 
         final List<Box> boxes = getBoxes();
-        final BoxNotePlayer player = getPlayer();
+        final BoxNotePlayer player = getBoxNotePlayer();
 
         boolean swapped = false;
         for (int i = 0; i < boxes.size() - 1; i++) {

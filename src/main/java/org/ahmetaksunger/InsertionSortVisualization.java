@@ -27,6 +27,7 @@ public class InsertionSortVisualization extends SortingVisualization {
 
     @Override
     public void visualize() throws InterruptedException {
+        setTitle(this.getClass().getSimpleName());
         setVisible(true);
         this.sort();
     }
@@ -38,7 +39,7 @@ public class InsertionSortVisualization extends SortingVisualization {
      */
     public void sort() throws InterruptedException {
         final List<Box> boxes = getBoxes();
-        final BoxNotePlayer player = getPlayer();
+        final BoxNotePlayer player = getBoxNotePlayer();
 
         for (int i = 1; i < boxes.size(); i++) {
             Box key = boxes.get(i);

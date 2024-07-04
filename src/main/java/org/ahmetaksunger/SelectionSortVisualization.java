@@ -30,6 +30,7 @@ public class SelectionSortVisualization extends SortingVisualization {
 
     @Override
     public void visualize() throws InterruptedException {
+        setTitle(this.getClass().getSimpleName());
         setVisible(true);
         this.sort();
     }
@@ -42,7 +43,7 @@ public class SelectionSortVisualization extends SortingVisualization {
     public void sort() throws InterruptedException {
 
         final List<Box> boxes = getBoxes();
-        final BoxNotePlayer player = getPlayer();
+        final BoxNotePlayer player = getBoxNotePlayer();
 
         for (int i = 0; i < getBoxes().size(); i++) {
 

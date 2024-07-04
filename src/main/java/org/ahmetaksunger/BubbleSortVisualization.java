@@ -3,7 +3,6 @@ package org.ahmetaksunger;
 import org.ahmetaksunger.frame.SortingVisualization;
 import org.ahmetaksunger.model.Box;
 import org.ahmetaksunger.util.BoxNotePlayer;
-import org.ahmetaksunger.util.BoxUtils;
 
 import java.awt.*;
 import java.util.Collections;
@@ -15,21 +14,26 @@ import java.util.List;
  */
 public class BubbleSortVisualization extends SortingVisualization {
 
-    private static final long sleep = 100;
+    private static final long sleep = 50;
 
-    private BoxNotePlayer player;
+    public BubbleSortVisualization(List<Box> boxes, int boxSpacing, BoxNotePlayer player) {
+        super(boxes, boxSpacing, player);
+    }
 
     /**
      * Constructs a BubbleSortVisualization with the specified list of boxes and box spacing.
      *
      * @param boxes      The list of boxes to visualize and sort.
      * @param boxSpacing The horizontal spacing between boxes.
-     * @throws InterruptedException If the thread is interrupted while sleeping.
      */
-    public BubbleSortVisualization(List<Box> boxes, int boxSpacing) throws InterruptedException {
+    public BubbleSortVisualization(List<Box> boxes, int boxSpacing) {
         super(boxes, boxSpacing);
-        this.player = new BoxNotePlayer(boxes, 50, 80, true);
-        sort();
+    }
+
+    @Override
+    public void visualize() throws InterruptedException {
+        setVisible(true);
+        this.sort();
     }
 
     /**
@@ -39,18 +43,20 @@ public class BubbleSortVisualization extends SortingVisualization {
      */
     public void sort() throws InterruptedException {
 
-        List<Box> boxes = getBoxes();
+        final List<Box> boxes = getBoxes();
+        final BoxNotePlayer player = getPlayer();
+
         boolean swapped = false;
         for (int i = 0; i < boxes.size() - 1; i++) {
             for (int j = 0; j < boxes.size() - i - 1; j++) {
                 if (boxes.get(j).getHeight() > boxes.get(j + 1).getHeight()) {
                     Collections.swap(boxes, j, j + 1);
                     boxes.get(j).setColor(Color.GREEN);
-                    boxes.get(j+1).setColor(Color.RED);
+                    boxes.get(j + 1).setColor(Color.RED);
                     super.repaint();
                     player.playBox(boxes.get(j), 100, sleep);
                     boxes.get(j).setColor(Color.WHITE);
-                    boxes.get(j+1).setColor(Color.WHITE);
+                    boxes.get(j + 1).setColor(Color.WHITE);
                     swapped = true;
                 }
             }
@@ -61,11 +67,5 @@ public class BubbleSortVisualization extends SortingVisualization {
         }
 
         sortingDoneAnimation();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        List<Box> defaultBoxes = BoxUtils.sorted(40, 600);
-        BoxUtils.shuffleX(defaultBoxes);
-        new BubbleSortVisualization(defaultBoxes, 30);
     }
 }

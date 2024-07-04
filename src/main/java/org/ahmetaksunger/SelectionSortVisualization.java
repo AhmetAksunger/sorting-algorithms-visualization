@@ -3,7 +3,6 @@ package org.ahmetaksunger;
 import org.ahmetaksunger.frame.SortingVisualization;
 import org.ahmetaksunger.model.Box;
 import org.ahmetaksunger.util.BoxNotePlayer;
-import org.ahmetaksunger.util.BoxUtils;
 
 import java.awt.*;
 import java.util.Collections;
@@ -14,20 +13,25 @@ import java.util.List;
  */
 public class SelectionSortVisualization extends SortingVisualization {
 
-    private static final long sleep = 200;
+    private static final long sleep = 50;
 
-    private BoxNotePlayer player;
+    public SelectionSortVisualization(List<Box> boxes, int boxSpacing, BoxNotePlayer player) {
+        super(boxes, boxSpacing, player);
+    }
 
     /**
      * Constructs a SelectionSortVisualization with the specified list of boxes.
      *
      * @param boxes The list of boxes to visualize and sort.
-     * @throws InterruptedException If the thread is interrupted while sleeping.
      */
-    public SelectionSortVisualization(List<Box> boxes, int boxSpacing) throws InterruptedException {
+    public SelectionSortVisualization(List<Box> boxes, int boxSpacing) {
         super(boxes, boxSpacing);
-        this.player = new BoxNotePlayer(boxes, 40, 70, true);
-        sort();
+    }
+
+    @Override
+    public void visualize() throws InterruptedException {
+        setVisible(true);
+        this.sort();
     }
 
     /**
@@ -37,7 +41,9 @@ public class SelectionSortVisualization extends SortingVisualization {
      */
     public void sort() throws InterruptedException {
 
-        List<Box> boxes = getBoxes();
+        final List<Box> boxes = getBoxes();
+        final BoxNotePlayer player = getPlayer();
+
         for (int i = 0; i < getBoxes().size(); i++) {
 
             Thread.sleep(sleep);
@@ -72,12 +78,5 @@ public class SelectionSortVisualization extends SortingVisualization {
         }
 
         sortingDoneAnimation();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        List<Box> defaultBoxes = BoxUtils.sorted(40, 600);
-        BoxUtils.shuffleX(defaultBoxes);
-        new SelectionSortVisualization(defaultBoxes, 30);
-
     }
 }

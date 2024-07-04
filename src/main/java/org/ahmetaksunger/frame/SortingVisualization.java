@@ -3,6 +3,7 @@ package org.ahmetaksunger.frame;
 
 import org.ahmetaksunger.exception.UnequalBoxWidthsException;
 import org.ahmetaksunger.model.Box;
+import org.ahmetaksunger.util.BoxNotePlayer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,17 +13,25 @@ import java.util.List;
  * This is a base class for different sorting visualizations. It extends {@link JFrame} and
  * provides a graphical visualization of a list of boxes.
  */
-public class SortingVisualization extends JFrame {
+public abstract class SortingVisualization extends JFrame {
 
     private final List<Box> boxes;
     private final int boxSpacing;
+    private final BoxNotePlayer player;
 
-    public SortingVisualization(List<Box> boxes, int boxSpacing) {
+    public SortingVisualization(List<Box> boxes, int boxSpacing, BoxNotePlayer player) {
         this.boxes = boxes;
         this.boxSpacing = boxSpacing;
+        this.player = player;
         validateBoxWidths();
         setFrame();
     }
+
+    public SortingVisualization(List<Box> boxes, int boxSpacing) {
+        this(boxes, boxSpacing, new BoxNotePlayer(boxes, 50, 80, true));
+    }
+
+    public abstract void visualize() throws InterruptedException;
 
     /**
      * Overrides the paint method to draw each box in the list using its specified color,
@@ -64,6 +73,10 @@ public class SortingVisualization extends JFrame {
      */
     public List<Box> getBoxes() {
         return boxes;
+    }
+
+    public BoxNotePlayer getPlayer() {
+        return player;
     }
 
     /**

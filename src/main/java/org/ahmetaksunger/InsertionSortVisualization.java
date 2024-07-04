@@ -3,28 +3,32 @@ package org.ahmetaksunger;
 import org.ahmetaksunger.frame.SortingVisualization;
 import org.ahmetaksunger.model.Box;
 import org.ahmetaksunger.util.BoxNotePlayer;
-import org.ahmetaksunger.util.BoxUtils;
 
 import java.awt.*;
 import java.util.List;
 
 public class InsertionSortVisualization extends SortingVisualization {
 
-    private static final long sleep = 100;
+    private static final long sleep = 50;
 
-    private BoxNotePlayer player;
+    public InsertionSortVisualization(List<Box> boxes, int boxSpacing, BoxNotePlayer player) {
+        super(boxes, boxSpacing, player);
+    }
 
     /**
      * Constructs an InsertionSortVisualization with the specified list of boxes and box spacing.
      *
      * @param boxes      The list of boxes to visualize and sort.
      * @param boxSpacing The horizontal spacing between boxes.
-     * @throws InterruptedException If the thread is interrupted while sleeping.
      */
-    public InsertionSortVisualization(List<Box> boxes, int boxSpacing) throws InterruptedException {
+    public InsertionSortVisualization(List<Box> boxes, int boxSpacing) {
         super(boxes, boxSpacing);
-        this.player = new BoxNotePlayer(boxes, 50, 80, true);
-        sort();
+    }
+
+    @Override
+    public void visualize() throws InterruptedException {
+        setVisible(true);
+        this.sort();
     }
 
     /**
@@ -33,7 +37,9 @@ public class InsertionSortVisualization extends SortingVisualization {
      * @throws InterruptedException If the thread is interrupted while sleeping.
      */
     public void sort() throws InterruptedException {
-        List<Box> boxes = getBoxes();
+        final List<Box> boxes = getBoxes();
+        final BoxNotePlayer player = getPlayer();
+
         for (int i = 1; i < boxes.size(); i++) {
             Box key = boxes.get(i);
             int j = i - 1;
@@ -55,11 +61,5 @@ public class InsertionSortVisualization extends SortingVisualization {
 
         sortingDoneAnimation();
 
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        List<Box> defaultBoxes = BoxUtils.sorted(40, 600);
-        BoxUtils.shuffleX(defaultBoxes);
-        new InsertionSortVisualization(defaultBoxes, 30);
     }
 }

@@ -60,7 +60,7 @@ public abstract class SortingVisualization extends JFrame {
         for (Box box : boxes) {
             box.setColor(Color.WHITE);
             super.repaint();
-            Thread.sleep(50);
+            boxNotePlayer.playBox(box, 100, 50);
             box.setColor(Color.GRAY);
             super.repaint();
         }
